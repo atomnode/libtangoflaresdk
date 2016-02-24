@@ -25,9 +25,9 @@ To use this class initialize the SDK in the AppDelegate as follows:
 #import <Foundation/Foundation.h>
 
 #import "TangoFlareMessageQueueController.h"
+#import "TangoFlareNavigationController.h"
 
 @class Contact;
-
 
 @interface TangoFlareSDK : NSObject
 
@@ -42,6 +42,36 @@ To use this class initialize the SDK in the AppDelegate as follows:
  Should be called in application:application didFinishLaunchingWithOptions:
  */
 +(void)initializeSDK;
+
+/** Handles the incoming remote notification
+ 
+ Should be called in application:didReceiveRemoteNotification:
+ 
+ @param userInfo The userInfo dictionary returned from application:didReceiveRemoteNotification:
+ @param completionHandler The completionHandler returned from application:didReceiveRemoteNotification:
+*/
++(void)didReceiveRemoteNotification:(NSDictionary *)userInfo
+             fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+
+/** Handles the incoming remote notification. Used in place of didReceiveRemoteNotification:fetchCompletionHandler:  if required to check whether the notification is handled by TangoFlare
+ 
+ Should be called in application:didReceiveRemoteNotification:
+ 
+ @param userInfo The userInfo dictionary returned from application:didReceiveRemoteNotification:
+ @param completionHandler The completionHandler returned from application:didReceiveRemoteNotification:
+ 
+ @return Returns whether the incoming remote notification is handled by TangoFlare
+ */
++(BOOL)isReceiveRemoteNotification:(NSDictionary *)userInfo;
+
+/** Handles the incoming local notification
+ 
+ Should be called in application:didReceiveLocalNotification:
+ 
+ @param application The application object returned from application:didReceiveLocalNotification:
+ @param notification The notification object returned from application:didReceiveLocalNotification:
+ */
++(void)application:(UIApplication*)application didReceiveLocalNotification:(UILocalNotification *)notification;
 
 
 /**---------------------------------------------------------------------------------------
@@ -88,6 +118,7 @@ To use this class initialize the SDK in the AppDelegate as follows:
 @return The contact details currently registered with the device
  */
 +(Contact*)getCurrentContact;
+
 
 /**---------------------------------------------------------------------------------------
  * @name TangoFlare tag methods
@@ -138,7 +169,6 @@ To use this class initialize the SDK in the AppDelegate as follows:
  */
 +(void)setConnectWith:(BOOL)opt_in ForName:(NSString*)nameString;
 
-
 /** Registers an event with TangoFlare
  
  @param eventString The name of the event
@@ -163,14 +193,15 @@ To use this class initialize the SDK in the AppDelegate as follows:
  */
 +(void)setViewLike:(NSString*)likeItemString;
 
+
 /**---------------------------------------------------------------------------------------
- * @name TangoFlare message queue methods
+ * @name TangoFlare message methods
  *  ---------------------------------------------------------------------------------------
  */
 
 /** Starts retrieving the messages from TangoFlare
  
- @param completionHandler The completion handler returned from application:handleActionWithIdentifier:forRemoteNotification:completionHandler:
+ @param completionHandler The completion handler returned from application:performFetchWithCompletionHandler:
  */
 +(void)startMessageQueueControllerWithFetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
@@ -180,6 +211,18 @@ To use this class initialize the SDK in the AppDelegate as follows:
  */
 +(TangoFlareMessageQueueController*)getMessageQueueController;
 
+
+/**---------------------------------------------------------------------------------------
+ * @name TangoFlare app inbox methods
+ *  ---------------------------------------------------------------------------------------
+ */
+
+/** Gets an instance of the TangoFlareNavigationController that is used to display the app inbox.
+ 
+ @return Instance of TangoFlareNavigationController
+ */
+
++(TangoFlareNavigationController*)getAppInbox;
 
 
 @end
