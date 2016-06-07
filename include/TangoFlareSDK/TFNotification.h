@@ -13,20 +13,29 @@
 
 @interface TFNotification : NSObject
 
-@property NSString *content_text;
-@property NSString *content_title;
+@property NSString *notification_id;
+@property NSString *message_type;
+@property NSString *appearance;
+@property NSString *recipient_type;
+@property NSString *segment_id;
+@property NSString *device_id;
+@property NSString *contact_id;
 @property NSString *content_type;
-@property NSString *content_url;
-@property NSDate *created_at;
-@property NSNumber *deliver_as_inbox;
-@property NSNumber *deliver_as_push;
-@property NSNumber *is_read;
+@property NSString *content_title;
+@property NSString *content_text;
+@property NSString *content_image;
+@property NSString *content_html;
+@property NSString *action_tap_perform;
+@property NSString *action_tap_url;
+@property NSString *action_tap_tracker_tag;
+@property NSString *action_button_one_perform;
+@property NSString *action_button_one_url;
+@property NSString *action_button_one_tracker_tag;
+@property NSString *action_button_two_perform;
+@property NSString *action_button_two_url;
+@property NSString *action_button_two_tracker_tag;
 @property NSDate *deliver_at;
-@property NSString *engage_type;
-@property NSString *engage_url;
-@property NSDate *expires_at;
-@property NSNumber *notification_id;
-@property NSNumber *project_id;
+@property NSNumber *is_read;
 
 /**---------------------------------------------------------------------------------------
  * @name Managing Push Notifications

@@ -105,7 +105,7 @@ To use this class initialize the SDK in the AppDelegate as follows:
 
 /** Registers a custom contact with TangoFlare
  
- @param ucidString The contact string as defined by the developer
+ @param ucidString The contact string as defined by the developer.The string must have a minimum length of 6 and a maximum length of 128.
  */
 +(void)registerContact:(NSString*)ucidString;
 
@@ -174,6 +174,15 @@ To use this class initialize the SDK in the AppDelegate as follows:
  @param eventString The name of the event
  */
 +(void)setEvent:(NSString*)eventString;
+
+/** Registers an event and its value with TangoFlare
+ 
+ The value stored is an accumulation of all values returned for a particular event
+ 
+ @param eventString The name of the event
+ @param value The value of the event
+ */
++(void)setEvent:(NSString*)eventString WithValue:(NSNumber*)value;
 
 /** Registers a category with TangoFlare
  
