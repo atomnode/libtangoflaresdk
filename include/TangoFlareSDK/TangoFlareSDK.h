@@ -18,7 +18,7 @@
  
 To use this class initialize the SDK in the AppDelegate as follows:
 
-    [TangoFlareSDK initializeSDK];
+    [[TangoFlareSDK sharedInstance] initializeSDK];
  
  */
 
@@ -37,11 +37,16 @@ To use this class initialize the SDK in the AppDelegate as follows:
  *  ---------------------------------------------------------------------------------------
  */
 
+/*
+ * Returns the TangoFlareSDK singleton
+ */
++ (instancetype)sharedInstance;
+
 /** Registers the device with TangoFlare
  
  Should be called in application:application didFinishLaunchingWithOptions:
  */
-+(void)initializeSDK;
+-(void)initializeSDK;
 
 /** Handles the incoming remote notification
  
@@ -50,7 +55,7 @@ To use this class initialize the SDK in the AppDelegate as follows:
  @param userInfo The userInfo dictionary returned from application:didReceiveRemoteNotification:
  @param completionHandler The completionHandler returned from application:didReceiveRemoteNotification:
 */
-+(void)didReceiveRemoteNotification:(NSDictionary *)userInfo
+-(void)didReceiveRemoteNotification:(NSDictionary *)userInfo
              fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
 /** Handles the incoming remote notification. Used in place of didReceiveRemoteNotification:fetchCompletionHandler:  if required to check whether the notification is handled by TangoFlare
@@ -62,7 +67,7 @@ To use this class initialize the SDK in the AppDelegate as follows:
  
  @return Returns whether the incoming remote notification is handled by TangoFlare
  */
-+(BOOL)isReceiveRemoteNotification:(NSDictionary *)userInfo;
+-(BOOL)isReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 /** Handles the incoming local notification
  
@@ -71,26 +76,7 @@ To use this class initialize the SDK in the AppDelegate as follows:
  @param application The application object returned from application:didReceiveLocalNotification:
  @param notification The notification object returned from application:didReceiveLocalNotification:
  */
-+(void)application:(UIApplication*)application didReceiveLocalNotification:(UILocalNotification *)notification;
-
-
-/**---------------------------------------------------------------------------------------
- * @name TangoFlare location methods
- *  ---------------------------------------------------------------------------------------
- */
-
-/** Starts sending user's location to TangoFlare
- 
- Requires location services permission from user
- */
-+(void)startUpdatingLocation;
-
-/** Stops sending user's location to TangoFlare
- 
- Use appropriate to control battery consumption
- */
-+(void)stopUpdatingLocation;
-
+-(void)application:(UIApplication*)application didReceiveLocalNotification:(UILocalNotification *)notification;
 
 /**---------------------------------------------------------------------------------------
  * @name TangoFlare registration methods
@@ -101,23 +87,23 @@ To use this class initialize the SDK in the AppDelegate as follows:
  
  @param deviceToken The push notification token obtained from the device
  */
-+(void)setDeviceToken:(NSData*)deviceToken;
+-(void)setDeviceToken:(NSData*)deviceToken;
 
 /** Registers a custom contact with TangoFlare
  
  @param ucidString The contact string as defined by the developer.The string must have a minimum length of 6 and a maximum length of 128.
  */
-+(void)registerContact:(NSString*)ucidString;
+-(void)registerContact:(NSString*)ucidString;
 
 /** Unregisters a custom contact with TangoFlare
 */
-+(void)unregisterContact;
+-(void)unregisterContact;
 
 /** Unregisters a custom contact with TangoFlare
  
 @return The contact details currently registered with the device
  */
-+(Contact*)getCurrentContact;
+-(Contact*)getCurrentContact;
 
 
 /**---------------------------------------------------------------------------------------
@@ -129,51 +115,59 @@ To use this class initialize the SDK in the AppDelegate as follows:
  
  @param opt_in YES indicates the the device has opted in : NO indicates the the device hasn't opted in
  */
-+(void)setOptInNotification:(BOOL)opt_in;
+-(void)setOptInNotification:(BOOL)opt_in;
 
 /** Registers with TangoFlare if the device has currently opted in to updating its Location
  
  @param opt_in YES indicates the the device has opted in : NO indicates the the device hasn't opted in
  */
-+(void)setOptInLocation:(BOOL)opt_in;
+-(void)setOptInLocation:(BOOL)opt_in;
 
 /** Registers with TangoFlare if the device has currently opted in to a permission defined by the developer
  
  @param opt_in YES indicates the the device has opted in : NO indicates the the device hasn't opted in
  @param nameString The permission defined by the developer
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
  */
-+(void)setOptIn:(BOOL)opt_in ForName:(NSString*)nameString;
+-(BOOL)setOptIn:(BOOL)opt_in ForName:(NSString*)nameString;
 
 /** Registers with TangoFlare if the device is currently connected with Facebook
  
  @param opt_in YES indicates the the device is connected : NO indicates the the device isn't connected
  */
-+(void)setConnectWithFacebook:(BOOL)opt_in;
+-(void)setConnectWithFacebook:(BOOL)opt_in;
 
 /** Registers with TangoFlare if the device is currently connected with Google
  
  @param opt_in YES indicates the the device is connected : NO indicates the the device isn't connected
  */
-+(void)setConnectWithGoogle:(BOOL)opt_in;
+-(void)setConnectWithGoogle:(BOOL)opt_in;
 
 /** Registers with TangoFlare if the device is currently connected with Twitter
  
  @param opt_in YES indicates the the device is connected : NO indicates the the device isn't connected
  */
-+(void)setConnectWithTwitter:(BOOL)opt_in;
+-(void)setConnectWithTwitter:(BOOL)opt_in;
 
 /** Registers with TangoFlare if the device is currently connected with a social network defined by the developer
  
  @param opt_in YES indicates the the device is connected : NO indicates the the device isn't connected
  @param nameString The social network defined by the developer
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
  */
-+(void)setConnectWith:(BOOL)opt_in ForName:(NSString*)nameString;
+-(BOOL)setConnectWith:(BOOL)opt_in ForName:(NSString*)nameString;
 
 /** Registers an event with TangoFlare
  
  @param eventString The name of the event
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
  */
-+(void)setEvent:(NSString*)eventString;
+-(BOOL)setEvent:(NSString*)eventString;
 
 /** Registers an event and its value with TangoFlare
  
@@ -181,26 +175,38 @@ To use this class initialize the SDK in the AppDelegate as follows:
  
  @param eventString The name of the event
  @param value The value of the event
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
  */
-+(void)setEvent:(NSString*)eventString WithValue:(NSNumber*)value;
+-(BOOL)setEvent:(NSString*)eventString WithValue:(NSNumber*)value;
 
 /** Registers a category with TangoFlare
  
  @param categoryString The name of the category
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
  */
-+(void)setCategory:(NSString*)categoryString;
+-(BOOL)setCategory:(NSString*)categoryString;
 
 /** Registers that the device has viewed an item with TangoFlare
  
  @param viewItemString The name of the item
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
  */
-+(void)setViewItem:(NSString*)viewItemString;
+-(BOOL)setViewItem:(NSString*)viewItemString;
 
 /** Registers that the device has liked an item with TangoFlare
  
  @param likeItemString The name of the item
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
  */
-+(void)setViewLike:(NSString*)likeItemString;
+-(BOOL)setViewLike:(NSString*)likeItemString;
 
 
 /**---------------------------------------------------------------------------------------
@@ -212,13 +218,13 @@ To use this class initialize the SDK in the AppDelegate as follows:
  
  @param completionHandler The completion handler returned from application:performFetchWithCompletionHandler:
  */
-+(void)startMessageQueueControllerWithFetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+-(void)startMessageQueueControllerWithFetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
 /** Gets the current instance of TangoFlareMessageQueueController
  
  @return Instance of TangoFlareMessageQueueController
  */
-+(TangoFlareMessageQueueController*)getMessageQueueController;
+-(TangoFlareMessageQueueController*)getMessageQueueController;
 
 
 /**---------------------------------------------------------------------------------------
@@ -231,7 +237,7 @@ To use this class initialize the SDK in the AppDelegate as follows:
  @return Instance of TangoFlareNavigationController
  */
 
-+(TangoFlareNavigationController*)getAppInbox;
+-(TangoFlareNavigationController*)getAppInbox;
 
 
 @end
