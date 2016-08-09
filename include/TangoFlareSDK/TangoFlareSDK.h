@@ -52,22 +52,24 @@ To use this class initialize the SDK in the AppDelegate as follows:
  
  Should be called in application:didReceiveRemoteNotification:
  
+ @param application The application object returned from application:didReceiveRemoteNotification:
  @param userInfo The userInfo dictionary returned from application:didReceiveRemoteNotification:
  @param completionHandler The completionHandler returned from application:didReceiveRemoteNotification:
 */
--(void)didReceiveRemoteNotification:(NSDictionary *)userInfo
-             fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+-(void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
 /** Handles the incoming remote notification. Used in place of didReceiveRemoteNotification:fetchCompletionHandler:  if required to check whether the notification is handled by TangoFlare
  
  Should be called in application:didReceiveRemoteNotification:
  
+ @param application The application object returned from application:didReceiveRemoteNotification:
  @param userInfo The userInfo dictionary returned from application:didReceiveRemoteNotification:
  @param completionHandler The completionHandler returned from application:didReceiveRemoteNotification:
  
  @return Returns whether the incoming remote notification is handled by TangoFlare
  */
--(BOOL)isReceiveRemoteNotification:(NSDictionary *)userInfo;
+-(BOOL)application:(UIApplication*)application isReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 /** Handles the incoming local notification
  
