@@ -27,7 +27,7 @@ To use this class initialize the SDK in the AppDelegate as follows:
 #import "TangoFlareMessageQueueController.h"
 #import "TangoFlareNavigationController.h"
 
-@class Contact;
+@class TangoFlareContact;
 
 @interface TangoFlareSDK : NSObject
 
@@ -105,7 +105,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  
 @return The contact details currently registered with the device
  */
--(Contact*)getCurrentContact;
+-(TangoFlareContact*)getCurrentContact;
 
 
 /**---------------------------------------------------------------------------------------
