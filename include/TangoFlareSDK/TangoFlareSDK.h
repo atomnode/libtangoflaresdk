@@ -107,6 +107,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  */
 -(TangoFlareContact*)getCurrentContact;
 
+-(NSString*)getUniqueContactId;
+-(NSString*)getUniqueDeviceId;
 
 /**---------------------------------------------------------------------------------------
  * @name TangoFlare tag methods
