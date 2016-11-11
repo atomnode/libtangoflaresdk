@@ -27,8 +27,6 @@ To use this class initialize the SDK in the AppDelegate as follows:
 #import "TangoFlareMessageQueueController.h"
 #import "TangoFlareNavigationController.h"
 
-@class TangoFlareContact;
-
 @interface TangoFlareSDK : NSObject
 
 
@@ -47,6 +45,24 @@ To use this class initialize the SDK in the AppDelegate as follows:
  Should be called in application:application didFinishLaunchingWithOptions:
  */
 -(void)initializeSDK;
+
+/** Registers the device with TangoFlare
+ 
+ Should be called in application:application didFinishLaunchingWithOptions:
+ 
+ @param completionBlock The block to execute when the initialization operation is complete
+ <table>
+ <tr>
+    <td><tt>success</tt></td>
+    <td>A boolean indicating whether the initialization operation was successful</td>
+ </tr>
+ <tr>
+    <td><tt>contactInfo</tt></td>
+    <td>A dictionary that contains information related to the initialization, including the unique contact id and the unique device id.</td>
+ </tr>
+ </table>
+ */
+-(void)initializeSDKWithCompletionBlock:(void (^)(BOOL success, NSDictionary *contactInfo))completionBlock;
 
 /** Handles the incoming remote notification
  
@@ -101,13 +117,16 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 */
 -(void)unregisterContact;
 
-/** Unregisters a custom contact with TangoFlare
+/** Returns the devices' unique contact id value
  
-@return The contact details currently registered with the device
+ @return String with the value of the unique contact id. Will return nil if the SDK has not been initialized.
  */
--(TangoFlareContact*)getCurrentContact;
-
 -(NSString*)getUniqueContactId;
+
+/** Returns the devices' unique device id value
+ 
+ @return String with the value of the unique device id. Will return nil if the SDK has not been initialized.
+ */
 -(NSString*)getUniqueDeviceId;
 
 /**---------------------------------------------------------------------------------------
