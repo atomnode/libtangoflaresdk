@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "libtangoflaresdk"
-  s.version      = "0.0.26"
+  s.version      = "1.0.0"
   s.summary      = "libtangoflaresdk for iOS"
   s.description  = "libtangoflaresdk for iOS (armv7,arm64,i386,x86_64)"
   s.homepage     = "http://github.com/"
@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
   s.resource  = 'include/TangoFlareSDK/**/*.bundle' 
   s.ios.preserve_paths      = 'lib-ios/libtangoflaresdk.a'
   s.ios.vendored_libraries  = 'lib-ios/libtangoflaresdk.a'
-  s.dependency "Realm", '2.1.0'
   s.dependency "AFNetworking", '~> 3.0'
   s.dependency "JSONModel", '~> 1.3.0'
   s.dependency "Valet", '~> 2.2.2'
