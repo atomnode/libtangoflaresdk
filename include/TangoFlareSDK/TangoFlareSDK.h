@@ -231,6 +231,22 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  */
 -(BOOL)setViewLike:(NSString*)likeItemString;
 
+/**---------------------------------------------------------------------------------------
+ * @name TangoFlare location methods
+ *  ---------------------------------------------------------------------------------------
+ */
+
+/** SDK will request WhenInUse authorization on your behalf
+ 
+ Must be called if location collection is enable
+ */
+- (void)requestWhenInUseLocationPermission;
+
+/** SDK will request Always authorization on your behalf
+ 
+ Must be called if Geo Fences are used
+ */
+- (void)requestAlwaysPermission;
 
 /**---------------------------------------------------------------------------------------
  * @name TangoFlare message methods
