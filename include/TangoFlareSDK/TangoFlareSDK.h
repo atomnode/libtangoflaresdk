@@ -27,6 +27,8 @@ To use this class initialize the SDK in the AppDelegate as follows:
 #import "TangoFlareMessageQueueController.h"
 #import "TangoFlareNavigationController.h"
 
+#import "TFContact.h"
+
 @interface TangoFlareSDK : NSObject
 
 
@@ -113,6 +115,12 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  */
 -(void)registerContact:(NSString*)ucidString;
 
+/** Update the contact details registered with this device. Only the values that have been set will be updated.
+ 
+ @param ucidString The contact details to be registered with Tango Flare.
+ */
+-(void)updateContactDetails:(TFContact*)contact;
+
 /** Unregisters a custom contact with TangoFlare
 */
 -(void)unregisterContact;
@@ -190,7 +198,16 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  
  @return a boolean indicating whether or not the name used for the tag is valid
  */
--(BOOL)setEvent:(NSString*)eventString;
+-(BOOL)addEvent:(NSString*)eventString;
+
+/* Unregisters an event with TangoFlare
+ 
+ @param eventString The name of the event
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
+ */
+-(BOOL)removeEvent:(NSString*)eventString;
 
 /** Registers an event and its value with TangoFlare
  
@@ -202,7 +219,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  
  @return a boolean indicating whether or not the name used for the tag is valid
  */
--(BOOL)setEvent:(NSString*)eventString WithValue:(NSNumber*)value;
+-(BOOL)addEvent:(NSString*)eventString WithValue:(NSNumber*)value;
 
 /** Registers a category with TangoFlare
  
@@ -211,7 +228,15 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  
  @return a boolean indicating whether or not the name used for the tag is valid
  */
--(BOOL)setCategory:(NSString*)categoryString;
+-(BOOL)addCategory:(NSString*)categoryString;
+   
+/** Unregisters a category with TangoFlare
+ 
+ @param categoryString The name of the category
+
+ @return a boolean indicating whether or not the name used for the tag is valid
+ */
+-(BOOL)removeCategory:(NSString*)categoryString;
 
 /** Registers that the device has viewed an item with TangoFlare
  
@@ -220,7 +245,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  
  @return a boolean indicating whether or not the name used for the tag is valid
  */
--(BOOL)setViewItem:(NSString*)viewItemString;
+-(BOOL)addViewItem:(NSString*)viewItemString;
 
 /** Registers that the device has liked an item with TangoFlare
  
@@ -229,7 +254,25 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  
  @return a boolean indicating whether or not the name used for the tag is valid
  */
--(BOOL)setViewLike:(NSString*)likeItemString;
+-(BOOL)addLikeItem:(NSString*)likeItemString;
+    
+/** Unregisters that the device has liked an item with TangoFlare
+ 
+ @param likeItemString The name of the item
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
+*/
+-(BOOL)removeLikeItem:(NSString*)likeItemString;
+
+/** Registers that the device has searched for an item with TangoFlare
+ 
+ @param likeItemString The name of the item
+ 
+ 
+ @return a boolean indicating whether or not the name used for the tag is valid
+ */
+-(BOOL)addSearchItem:(NSString*)searchItemString;
 
 /**---------------------------------------------------------------------------------------
  * @name TangoFlare location methods
