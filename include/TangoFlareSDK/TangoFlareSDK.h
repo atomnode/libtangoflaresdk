@@ -24,7 +24,6 @@ To use this class initialize the SDK in the AppDelegate as follows:
 
 #import <Foundation/Foundation.h>
 
-#import "TangoFlareMessageQueueController.h"
 #import "TangoFlareNavigationController.h"
 
 #import "TFContact.h"
@@ -290,24 +289,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
  Must be called if Geo Fences are used
  */
 - (void)requestAlwaysPermission;
-
-/**---------------------------------------------------------------------------------------
- * @name TangoFlare message methods
- *  ---------------------------------------------------------------------------------------
- */
-
-/** Starts retrieving the messages from TangoFlare
- 
- @param completionHandler The completion handler returned from application:performFetchWithCompletionHandler:
- */
--(void)startMessageQueueControllerWithFetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
-
-/** Gets the current instance of TangoFlareMessageQueueController
- 
- @return Instance of TangoFlareMessageQueueController
- */
--(TangoFlareMessageQueueController*)getMessageQueueController;
-
 
 /**---------------------------------------------------------------------------------------
  * @name TangoFlare app inbox methods
